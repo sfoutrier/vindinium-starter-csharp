@@ -26,10 +26,7 @@ namespace vindinium
             if (serverStuff.errored == false)
             {
                 //opens up a webpage so you can view the game, doing it async so we dont time out
-                new Thread(delegate()
-                {
                     System.Diagnostics.Process.Start(serverStuff.viewURL);
-                }).Start();
             }
             
             Random random = new Random();
