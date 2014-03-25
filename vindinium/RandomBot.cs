@@ -26,29 +26,37 @@ namespace vindinium
             if (serverStuff.errored == false)
             {
                 //opens up a webpage so you can view the game, doing it async so we dont time out
-                    System.Diagnostics.Process.Start(serverStuff.viewURL);
+                System.Diagnostics.Process.Start(serverStuff.viewURL);
             }
-            
-            Random random = new Random();
+
+            Tile[] mines = LoadUsefullMines(serverStuff.myHero.id);
+
             while (serverStuff.finished == false && serverStuff.errored == false)
             {
-                switch(random.Next(0, 6))
+                IList<Tile> targets;
+                if (serverStuff.myHero.life > 50)
+                    targets = new List<Tile>(mines);
+                else if (serverStuff.myHero.life > 20)
                 {
-                    case 0:
-                        serverStuff.moveHero(Direction.East);
-                        break;
-                    case 1:
-                        serverStuff.moveHero(Direction.North);
-                        break;
-                    case 2:
-                        serverStuff.moveHero(Direction.South);
-                        break;
-                    case 3:
-                        serverStuff.moveHero(Direction.Stay);
-                        break;
-                    case 4:
-                        serverStuff.moveHero(Direction.West);
-                        break;
+                    targets = new List<Tile>(mines);
+                    targets.Add(Tile.TAVERN);
+                }
+                else
+                    targets = new Tile[] { Tile.TAVERN };
+                var heroPos = new Pos {x = serverStuff.myHero.pos.y, y = serverStuff.myHero.pos.x};
+                var road = Road.ShortestRoadTo(heroPos, targets, serverStuff.board);
+
+                Console.WriteLine(serverStuff.myHero);
+                if (road != null)
+                {
+                    Console.WriteLine("Aiming to " + road.Target + road.Destination + " " + road.Next + " distance of " + road.Length);
+                    Console.WriteLine(road);
+                    serverStuff.moveHero(road.Next);
+                }
+                else
+                {
+                    Console.WriteLine("Nowhere to go");
+                    serverStuff.moveHero(Direction.Stay);
                 }
 
                 Console.Out.WriteLine("completed turn " + serverStuff.currentTurn);
@@ -60,6 +68,29 @@ namespace vindinium
             }
 
             Console.Out.WriteLine("random bot finished");
+        }
+
+        public static Tile[] LoadUsefullMines(int playerId)
+        {
+            Tile[] mines;
+            switch (playerId)
+            {
+                case 1:
+                    mines = new Tile[] { Tile.GOLD_MINE_NEUTRAL, Tile.GOLD_MINE_2, Tile.GOLD_MINE_3, Tile.GOLD_MINE_4 };
+                    break;
+                case 2:
+                    mines = new Tile[] { Tile.GOLD_MINE_NEUTRAL, Tile.GOLD_MINE_1, Tile.GOLD_MINE_3, Tile.GOLD_MINE_4 };
+                    break;
+                case 3:
+                    mines = new Tile[] { Tile.GOLD_MINE_NEUTRAL, Tile.GOLD_MINE_1, Tile.GOLD_MINE_2, Tile.GOLD_MINE_4 };
+                    break;
+                case 4:
+                    mines = new Tile[] { Tile.GOLD_MINE_NEUTRAL, Tile.GOLD_MINE_1, Tile.GOLD_MINE_2, Tile.GOLD_MINE_3 };
+                    break;
+                default:
+                    throw new Exception();
+            }
+            return mines;
         }
     }
 }

@@ -106,7 +106,9 @@ namespace vindinium
             maxTurns = gameResponse.game.maxTurns;
             finished = gameResponse.game.finished;
 
-            createBoard(gameResponse.game.board.size, gameResponse.game.board.tiles);
+            //Console.WriteLine(gameResponse.game.board.size);
+            //Console.WriteLine(gameResponse.game.board.tiles);
+            board = createBoard(gameResponse.game.board.size, gameResponse.game.board.tiles);
         }
 
         public void moveHero(string direction)
@@ -134,8 +136,9 @@ namespace vindinium
             }
         }
 
-        private void createBoard(int size, string data)
+        public static Tile[][] createBoard(int size, string data)
         {
+            Tile[][] board = null;
             //check to see if the board list is already created, if it is, we just overwrite its values
             if (board == null || board.Length != size)
             {
@@ -214,6 +217,7 @@ namespace vindinium
                     y++;
                 }
             }
+            return board;
         }
     }
 }

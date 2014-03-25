@@ -77,6 +77,11 @@ namespace vindinium
 
         [DataMember]
         internal bool crashed;
+
+        public override string ToString()
+        {
+            return name + " " + id + " " + pos + " gold:" + gold + " life:" + life; 
+        }
     }
 
     [DataContract]
@@ -87,6 +92,17 @@ namespace vindinium
 
         [DataMember]
         internal int y;
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as Pos;
+            return other.x == x && other.y == y;
+        }
+
+        public override string ToString()
+        {
+            return "{x=" + x + ";y=" + y + "}";
+        }
     }
 
     [DataContract]
