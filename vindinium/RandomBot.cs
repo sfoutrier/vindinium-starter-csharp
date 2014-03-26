@@ -33,6 +33,9 @@ namespace vindinium
 
             while (serverStuff.finished == false && serverStuff.errored == false)
             {
+                // reverting the hero pos since it's inverted ...
+                var heroPos = serverStuff.myHero.pos.Revert;
+
                 IList<Tile> targets;
                 if (serverStuff.myHero.life > 50)
                     targets = new List<Tile>(mines);
@@ -43,7 +46,7 @@ namespace vindinium
                 }
                 else
                     targets = new Tile[] { Tile.TAVERN };
-                var heroPos = new Pos {x = serverStuff.myHero.pos.y, y = serverStuff.myHero.pos.x};
+
                 var road = Road.ShortestRoadTo(heroPos, targets, serverStuff.board);
 
                 Console.WriteLine(serverStuff.myHero);

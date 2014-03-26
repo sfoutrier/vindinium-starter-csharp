@@ -93,6 +93,14 @@ namespace vindinium
         [DataMember]
         internal int y;
 
+        public Pos Revert
+        {
+            get
+            {
+                return new Pos { x = this.y, y = this.x };
+            }
+        }
+
         public override bool Equals(object obj)
         {
             var other = obj as Pos;
