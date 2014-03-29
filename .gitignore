@@ -1,0 +1,9 @@
+bin/
+obj/
+*.user
+*.suo
+*.nupkg
+cbs.log
+/.cbs/
+/logs/
+/packages/

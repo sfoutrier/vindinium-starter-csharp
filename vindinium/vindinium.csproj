@@ -46,7 +46,7 @@
     <Compile Include="Enums.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RandomBot.cs" />
+    <Compile Include="FleeBot.cs" />
     <Compile Include="Road.cs" />
     <Compile Include="ServerStuff.cs" />
   </ItemGroup>

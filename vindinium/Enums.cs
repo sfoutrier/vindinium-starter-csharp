@@ -19,7 +19,7 @@ namespace vindinium
         GOLD_MINE_1,
         GOLD_MINE_2,
         GOLD_MINE_3,
-        GOLD_MINE_4
+        GOLD_MINE_4,
     }
 
     class Direction

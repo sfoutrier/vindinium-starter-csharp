@@ -78,6 +78,46 @@ namespace vindinium
         [DataMember]
         internal bool crashed;
 
+        public Tile HeroTile 
+        { 
+            get 
+            {
+                switch (id)
+                {
+                    case 1:
+                        return Tile.HERO_1;
+                    case 2:
+                        return Tile.HERO_2;
+                    case 3:
+                        return Tile.HERO_3;
+                    case 4:
+                        return Tile.HERO_4;
+                    default:
+                        throw new Exception();
+                }
+            }
+        }
+
+        public Tile MineTile
+        {
+            get
+            {
+                switch (id)
+                {
+                    case 1:
+                        return Tile.GOLD_MINE_1;
+                    case 2:
+                        return Tile.GOLD_MINE_2;
+                    case 3:
+                        return Tile.GOLD_MINE_3;
+                    case 4:
+                        return Tile.GOLD_MINE_4;
+                    default:
+                        throw new Exception();
+                }
+            }
+        }
+
         public override string ToString()
         {
             return name + " " + id + " " + pos + " gold:" + gold + " life:" + life; 
@@ -99,6 +139,11 @@ namespace vindinium
             {
                 return new Pos { x = this.y, y = this.x };
             }
+        }
+
+        public override int GetHashCode()
+        {
+            return x ^ (y << 16);
         }
 
         public override bool Equals(object obj)

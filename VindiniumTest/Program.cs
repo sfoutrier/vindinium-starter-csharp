@@ -11,7 +11,7 @@ namespace VindiniumTest
         static void Main(string[] args)
         {
             var test = new RoadTest();
-            test.TestRoad3();
+            test.TestRoad4();
         }
     }
 }
