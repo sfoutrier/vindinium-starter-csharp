@@ -29,26 +29,8 @@ namespace vindinium
                 System.Diagnostics.Process.Start(serverStuff.viewURL);
             }
 
-            Tile[] mines = LoadUsefullMines(serverStuff.myHero.id);
-
             while (serverStuff.finished == false && serverStuff.errored == false)
             {
-                // reverting the hero pos since it's inverted ...
-                //var heroPos = serverStuff.myHero.pos.Revert;
-
-                //IList<Tile> targets;
-                //if (serverStuff.myHero.life > 50)
-                //    targets = new List<Tile>(mines);
-                //else if (serverStuff.myHero.life > 20)
-                //{
-                //    targets = new List<Tile>(mines);
-                //    targets.Add(Tile.TAVERN);
-                //}
-                //else
-                //    targets = new Tile[] { Tile.TAVERN };
-
-                //var road = Road.ShortestRoadTo(serverStuff.board, heroPos, targets);
-
                 var stupidity = new ArtificialStupidity(serverStuff.myHero, serverStuff.heroes, serverStuff.board);
                 Road road;
                 int score = stupidity.PreferedRoad(out road);
@@ -230,29 +212,6 @@ namespace vindinium
             {
                 return -roadLength;
             }
-        }
-
-        public static Tile[] LoadUsefullMines(int playerId)
-        {
-            Tile[] mines;
-            switch (playerId)
-            {
-                case 1:
-                    mines = new Tile[] { Tile.GOLD_MINE_NEUTRAL, Tile.GOLD_MINE_2, Tile.GOLD_MINE_3, Tile.GOLD_MINE_4 };
-                    break;
-                case 2:
-                    mines = new Tile[] { Tile.GOLD_MINE_NEUTRAL, Tile.GOLD_MINE_1, Tile.GOLD_MINE_3, Tile.GOLD_MINE_4 };
-                    break;
-                case 3:
-                    mines = new Tile[] { Tile.GOLD_MINE_NEUTRAL, Tile.GOLD_MINE_1, Tile.GOLD_MINE_2, Tile.GOLD_MINE_4 };
-                    break;
-                case 4:
-                    mines = new Tile[] { Tile.GOLD_MINE_NEUTRAL, Tile.GOLD_MINE_1, Tile.GOLD_MINE_2, Tile.GOLD_MINE_3 };
-                    break;
-                default:
-                    throw new Exception();
-            }
-            return mines;
         }
     }
 }
