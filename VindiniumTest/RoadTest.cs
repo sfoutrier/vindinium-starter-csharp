@@ -56,30 +56,6 @@ namespace VindiniumTest
         }
 
         [Test]
-        public void TestRoad3()
-        {
-            // http://vindinium.org/u99j2jag
-            var boardSize = 20;
-            var boardTile = "##              ########              ########  ########################  ############  ##$-[]############[]$-##  ############          ########@4        ######"
-                          + "  $-  ##          ####          ##  $-            ##      ####      ##              $-  ####@1##        ##  ####  $-          ##        ##    ##        ##      "
-                          + "      ####    ############    ####              ########################                ########################              ####@2  ############    ####      "
-                          + "      ##        ##    ##        ##          $-  ####  ##        ##  ####  $-              ##      ####      ##            $-  ##          ####          ##  $-  "
-                          + "######          ########@3        ############  ##$-[]############[]$3##  ############  ########################  ########              ########              ##";
-            var board = ServerStuff.createBoard(boardSize, boardTile);
-
-            Pos hero1Pos = null;
-            for (int i = 0; i < boardSize; i++)
-                for (int j = 0; j < boardSize; j++)
-                    if (board[i][j] == Tile.HERO_1)
-                        hero1Pos = new Pos {x = i, y = j};
-
-            var minesTile = FleeBot.LoadUsefullMines(1);
-
-            var road = Road.ShortestRoadTo(board, hero1Pos, minesTile);
-            Console.WriteLine(road);
-        }
-
-        [Test]
         public void TestRoad4()
         {
             // http://vindinium.org/u99j2jag
